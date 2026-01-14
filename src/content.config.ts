@@ -17,25 +17,26 @@ const blog = defineCollection({
 });
 
 const authors = defineCollection({
-  loader: file("src/content/authors.yml"),
-  schema: ({ image }) =>
-	z.object({
-	  id: z.string(),
-	  name: z.string(),
-	  bio: z.string(),
-	  avatar: image().optional(),
-	}),
+	loader: file('src/content/authors.yml'),
+	schema: ({ image }) =>
+		z.object({
+			id: z.string(),
+			name: z.string(),
+			bio: z.string(),
+			avatar: image().optional(),
+			role: z.string().optional(),
+			location: z.string().optional(),
+			focus: z.string().optional(),
+		}),
 });
 
 const socials = defineCollection({
-  loader: file("src/content/socials.yml"),
-	schema: z.array(
-		z.object({
-			id: z.string().optional(),
-			label: z.string(),
-			href: z.string(),
-		}),
-	),
+	loader: file('src/content/socials.yml'),
+	schema: z.object({
+		id: z.string().optional(),
+		label: z.string(),
+		href: z.string(),
+	}),
 });
 
 export const collections = { blog, socials, authors };

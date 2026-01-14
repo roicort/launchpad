@@ -4,9 +4,7 @@ import { getCollection } from 'astro:content';
 import Clock from './Clock.astro';
 
 const today = new Date();
-const socials = (await getCollection('socials')).flatMap((entry) =>
-  Array.isArray(entry.data) ? entry.data : [entry.data],
-);
+const socials = (await getCollection('socials')).map((entry) => entry.data);
 ---
 
 <footer class="mt-12 border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-5 md:px-7 py-8">
