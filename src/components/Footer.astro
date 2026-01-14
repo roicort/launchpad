@@ -1,10 +1,19 @@
 ---
 import { SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components'
 import Clock from './Clock.astro';
 
 const today = new Date();
 const socials = (await getCollection('socials')).map((entry) => entry.data);
+const iconMap: Record<string, string> = {
+  x: 'tabler:brand-x',
+  twitter: 'tabler:brand-x',
+  github: 'tabler:brand-github',
+  linkedin: 'tabler:brand-linkedin',
+  email: 'tabler:mail',
+  mastodon: 'tabler:brand-mastodon',
+};
 ---
 
 <footer class="mt-12 border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-5 md:px-7 py-8">
@@ -23,16 +32,31 @@ const socials = (await getCollection('socials')).map((entry) => entry.data);
         <div class="grid gap-3">
           <p class="text-3xl sm:text-4xl font-semibold tracking-tight text-ink">Connect</p>
           <div class="grid gap-2 sm:grid-cols-2 text-sm text-muted">
-            {socials.map((social) => (
-              <a
-                href={social.href}
-                target={social.href.startsWith('http') ? '_blank' : undefined}
-                rel={social.href.startsWith('http') ? 'noreferrer' : undefined}
-                class="flex items-center gap-2 transition-colors hover:text-ink"
-              >
-                <span>{social.label}</span>
-              </a>
-            ))}
+            {socials.map((social) => {
+              const iconName = social.id ? iconMap[social.id.toLowerCase()] : undefined;
+              const fallback = social.label?.trim()?.[0]?.toUpperCase() ?? '?';
+              return (
+                <a
+                  href={social.href}
+                  target={social.href.startsWith('http') ? '_blank' : undefined}
+                  rel={social.href.startsWith('http') ? 'noreferrer' : undefined}
+                  class="flex items-center gap-2 rounded-md px-2 py-1 transition-colors hover:text-ink hover:bg-[color:color-mix(in_oklab,var(--color-ink)_3%,transparent)]"
+                >
+                  {iconName ? (
+                    <Icon
+                      name={iconName}
+                      size={18}
+                      strokeWidth={1.5}
+                      class="text-ink"
+                      aria-hidden={true}
+                    />
+                  ) : (
+                    <span class="inline-flex h-[26px] w-[26px] items-center justify-center rounded-full border border-[color:var(--color-border)] text-[0.7rem] font-semibold text-ink" aria-hidden="true">{fallback}</span>
+                  )}
+                  <span class="leading-tight">{social.label}</span>
+                </a>
+              );
+            })}
           </div>
         </div>
         <div class="grid gap-3">

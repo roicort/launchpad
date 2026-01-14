@@ -6,11 +6,13 @@ import { defineConfig, fontProviders } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import icon from "astro-icon";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://roicort.github.io",
   base: "/scaffold",
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), icon()],
 
   vite: {
     plugins: [tailwindcss()],
