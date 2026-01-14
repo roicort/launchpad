@@ -28,34 +28,45 @@ const initialTime = formatter.format(new Date());
 
 <div class={classes}>
   {label && <span class="text-xs uppercase tracking-[0.08em] text-subtle">{label}</span>}
-  <span id={clockId} aria-live="polite" class="text-sm font-semibold text-ink">{initialTime}</span>
+  <span
+    id={clockId}
+    data-locale={locale}
+    data-time-zone={timeZone ?? ''}
+    data-hour12={hour12 ? 'true' : 'false'}
+    aria-live="polite"
+    class="text-sm font-semibold text-ink"
+  >
+    {initialTime}
+  </span>
 </div>
 
-<script type="module">
-  const clockId = '{clockId}';
-  const locale = '{locale}';
-  const timeZone = '{timeZone ?? ''}';
-  const hour12 = {hour12 ? 'true' : 'false'};
-  const clockEl = document.getElementById(clockId);
-
-  const formatter = new Intl.DateTimeFormat(locale, {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12,
-    timeZone: timeZone || undefined,
-  });
-
-  function updateClock() {
+<script is:inline>
+  (() => {
+    const clockEl = document.getElementById('{clockId}');
     if (!clockEl) return;
-    clockEl.textContent = formatter.format(new Date());
-  }
 
-  updateClock();
+    const locale = clockEl.dataset.locale || 'en-US';
+    const timeZone = clockEl.dataset.timeZone || undefined;
+    const hour12 = clockEl.dataset.hour12 === 'true';
 
-  const now = new Date();
-  const msToNextMinute = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
-  setTimeout(() => {
+    const formatter = new Intl.DateTimeFormat(locale, {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12,
+      timeZone: timeZone || undefined,
+    });
+
+    const updateClock = () => {
+      clockEl.textContent = formatter.format(new Date());
+    };
+
     updateClock();
-    setInterval(updateClock, 60 * 1000);
-  }, msToNextMinute);
+
+    const now = new Date();
+    const msToNextMinute = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+    setTimeout(() => {
+      updateClock();
+      setInterval(updateClock, 60 * 1000);
+    }, msToNextMinute);
+  })();
 </script>
