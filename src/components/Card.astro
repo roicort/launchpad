@@ -3,8 +3,6 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro:assets';
 import FormattedDate from './FormattedDate.astro';
 
-type Variant = 'post' | 'default';
-
 interface Props {
 	title: string;
 	href?: string;
@@ -13,47 +11,47 @@ interface Props {
 	image?: ImageMetadata | string;
 	imageAlt?: string;
 	eyebrow?: string;
-	variant?: Variant;
 }
 
-const {
-	title,
-	href,
-	description,
-	date,
-	image,
-	imageAlt = '',
-	eyebrow,
-	variant = 'default',
-} = Astro.props as Props;
+const { title, href, description, date, image, imageAlt = '', eyebrow } = Astro.props as Props;
 
 const baseDate = typeof date === 'string' ? new Date(date) : date;
-const isPost = variant === 'post';
-const articleClass = isPost ? 'post-card flex flex-col gap-4 h-full' : 'card flex flex-col gap-3 h-full';
+const articleClass =
+	'group flex h-full flex-col gap-4 rounded-[20px] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]/95 p-5 shadow-none transition duration-200 hover:-translate-y-1 hover:shadow-[0_22px_55px_color-mix(in_oklab,var(--color-ink)_10%,transparent)]';
 ---
 
 <article class={articleClass}>
 	{image && (
-		<figure>
+		<figure class="relative overflow-hidden rounded-[16px] border border-[color:var(--color-border)] bg-[color-mix(in_oklab,var(--color-ink)_4%,var(--color-surface))]">
 			{typeof image === 'string' ? (
-				<img src={image} alt={imageAlt} loading="lazy" />
+				<img
+					src={image}
+					alt={imageAlt}
+					loading="lazy"
+					class="aspect-[16/10] w-full object-cover transition duration-400 group-hover:scale-[1.02] sm:aspect-[4/3]"
+				/>
 			) : (
-				<Image src={image} alt={imageAlt} loading="lazy" />
+				<Image
+					src={image}
+					alt={imageAlt}
+					loading="lazy"
+					class="aspect-[16/10] w-full object-cover transition duration-400 group-hover:scale-[1.02] sm:aspect-[4/3]"
+				/>
 			)}
 		</figure>
 	)}
 
-	{eyebrow && <p class="text-[0.65rem] uppercase tracking-[0.4em] text-subtle">{eyebrow}</p>}
+	{eyebrow && <p class="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-subtle">{eyebrow}</p>}
 
-	{isPost && baseDate && (
-		<p class="post-card-date">
+	{baseDate && (
+		<p class="text-sm text-muted">
 			<FormattedDate date={baseDate} />
 		</p>
 	)}
 
-	<h3 class="text-xl font-semibold leading-tight">
+	<h3 class="text-lg font-semibold leading-tight text-ink transition-colors duration-150 group-hover:text-ink sm:text-xl">
 		{href ? (
-			<a class="hover:text-ink" href={href}>
+			<a class="hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[color:var(--color-border)]" href={href}>
 				{title}
 			</a>
 		) : (
@@ -61,18 +59,9 @@ const articleClass = isPost ? 'post-card flex flex-col gap-4 h-full' : 'card fle
 		)}
 	</h3>
 
-	{description && <p class="text-sm text-muted">{description}</p>}
+	{description && <p class="text-[0.97rem] leading-relaxed text-muted">{description}</p>}
 
-	<div class="mt-auto">
+	<div class="mt-auto pt-2 text-[0.95rem] text-ink/80">
 		<slot />
 	</div>
-
-	{isPost && (
-		<div class="mt-2 flex items-center justify-between text-subtle text-[0.7rem] uppercase tracking-[0.4em]">
-			<span>Read story</span>
-			<span aria-hidden="true" class="text-lg">
-				→
-			</span>
-		</div>
-	)}
 </article>
