@@ -5,7 +5,7 @@ type Props = HTMLAttributes<'a'> & {
 	activeClass?: string;
 };
 
-const { href, class: className, activeClass = '', ...props } = Astro.props;
+const { href, class: className, activeClass = 'text-ink font-semibold', ...props } = Astro.props;
 
 const pathname = Astro.url.pathname;
 const subpath = import.meta.env.BASE_URL

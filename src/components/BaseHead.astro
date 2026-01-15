@@ -50,8 +50,6 @@ const imageURL = new URL((image as ImageMetadata).src, Astro.site ?? Astro.url);
 			{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
 			{ rel: 'sitemap', href: '/sitemap-index.xml' },
 			{ rel: 'alternate', type: 'application/rss+xml', title: site.title, href: new URL('rss.xml', Astro.site).toString() },
-			{ rel: 'preload', href: '/fonts/atkinson-regular.woff', as: 'font', type: 'font/woff', crossorigin: '' },
-			{ rel: 'preload', href: '/fonts/atkinson-bold.woff', as: 'font', type: 'font/woff', crossorigin: '' },
 		],
 		meta: [
 			{ name: 'viewport', content: 'width=device-width,initial-scale=1' },
