@@ -2,6 +2,7 @@
 
 import Card from './Card.astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '../utils/slugify';
 
 interface RawPost {
     // collection item shape:
@@ -53,18 +54,18 @@ if (posts.length === 0) {
     );
 }
 
-const subpath = import.meta.env.BASE_URL
+const subpath = import.meta.env.BASE_URL;
 
 const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
 
 ---
 
-<section class="max-w-[90rem] mx-auto px-8">
+<section class="content-shell">
     <div>
         <div
-            class="grid grid-cols-1 gap-y-24 md:grid-cols-3 border-b py-24 border-base-200"
+            class="grid grid-cols-1 border-base-200"
         >
-            <div class="lg:sticky lg:top-24 lg:z-40 self-start">
+            <div class="mt-0 mb-8">
                 <h2
                     class="text-sm 2xl:text-xl text-base-900 font-bold uppercase"
                 >
@@ -81,8 +82,10 @@ const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
                         console.log(p);
                         const id = (post as any).id;
                         const href = id
-                            ? `${subpath}/blog/${id}`
-                            : (p.href ?? undefined);
+                            ? withBase(`/blog/${id}/`)
+                            : p.href
+                                ? withBase(p.href)
+                                : undefined;
                         const rawDate = p.pubDate ?? null;
                         const pubDate = rawDate
                             ? rawDate instanceof Date
@@ -105,7 +108,7 @@ const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
                 }
                 <Card
                     title={viewAllLabel}
-                    href={`${subpath}${viewAllHref}`}
+                    href={withBase(viewAllHref ?? '/blog/')}
                     variant="post"
                 />
             </div>

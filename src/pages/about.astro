@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import Values from '../components/Values.astro';
 ---
 
 <PageLayout
@@ -7,57 +8,26 @@ import PageLayout from '../layouts/PageLayout.astro';
 	description="We shape product, brand, and code for mission-driven teams."
 	eyebrow="Studio"
 >
-	<section class="prose pt-4 md:pt-6">
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-			labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-			viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-			adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-			et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-			vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-			sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-		</p>
-
-		<p>
-			Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-			tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-			blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-			porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-			massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-			Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-			bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-			massa massa ultricies mi.
-		</p>
-
-		<p>
-			Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-			suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-			nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-			turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-			dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-			semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-			vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-			facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-			vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-			urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-		</p>
-
-		<p>
-			Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-			viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-			scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-			gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-			pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-			blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-			cursus metus aliquam eleifend mi.
-		</p>
-
-		<p>
-			Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-			nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-			tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-			ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-			proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-		</p>
+	<section class="content-shell py-12 space-y-8"> 
+		<div class="space-y-3 max-w-3xl">
+			<p class="m-0 text-ink text-2xl font-semibold leading-tight">We are a compact, senior studio blending research, design, and engineering to ship resilient products.</p>
+			<p class="m-0 text-muted">We stay close to the people using what we build: quick interviews, async notes, and instrumented releases. Decisions stay traceable so teams know why something shipped, not just what shipped.</p>
+			<p class="m-0 text-muted">When we embed with clients, we bring our own delivery discipline—strong briefs, scoped milestones, and demos that keep stakeholders aligned. The goal: fewer surprises, faster learning.</p>
+		</div>
 	</section>
+
+	<div class="mt-12 md:mt-16">
+		<Values
+			useShell={false}
+			eyebrow="Values"
+			title="How we show up"
+			copy="Principles we keep front-and-center so every project ships with the same intent and craft."
+			values={[
+				{ title: 'Clarity over noise', description: 'We write, design, and code to be understood quickly by teams and customers.' },
+				{ title: 'Bias for shipping', description: 'We prefer small, validated releases over long bets that never reach users.' },
+				{ title: 'Craft with pragmatism', description: 'Quality matters most when it serves the outcome—polish meets purpose.' },
+				{ title: 'Partnership mindset', description: 'We behave like embedded teammates, not vendors: transparent, responsive, reliable.' },
+			]}
+		/>
+	</div>
 </PageLayout>

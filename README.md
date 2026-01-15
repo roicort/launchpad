@@ -1,62 +1,73 @@
-# Astro Starter Kit: Blog
+# Astro Launchpad
+
+An Astro starter tailored for agencies and studios: MDX blog, global search, RSS, sitemap, light/dark/blue themes, and components ready to sell services or publish content.
+
+![](./public/SS-1.png)
+
+## Features
+- Blog with Markdown/MDX, featured post, and tag listings
+- Typed collections for posts, authors, and socials in [src/content.config.ts](src/content.config.ts)
+- Site-wide search via Pagefind with an accessible modal
+- SEO-ready: OpenGraph/Twitter, canonical links, and preloaded fonts in [src/components/BaseHead.astro](src/components/BaseHead.astro)
+- Themes `light/dark/blue` with persistent toggle; debug toggle for layout borders
+- RSS (`/rss.xml`) and sitemap (`/sitemap-index.xml`) generated automatically
+
+
+<div style="display: flex; align-items: center; gap: 10px; width: 100%; margin-top: 20px;">
+    <img src="./public/SS-2.png" style="width: 180px; vertical-align: middle;" />
+    <img src="./public/SS-3.png" style="width: 180px; vertical-align: middle;" />
+    <img src="./public/SS-4.png" style="width: 180px; vertical-align: middle;" />
+</div>
+
+
+## Requirements
+- Bun
+- Astro @latest
+- Tailwdind CSS
+
+## Install & run
 
 ```sh
-bun create astro@latest -- --template blog
+# install dependencies
+bun install
+
+# start dev server
+bun run dev
+
+# production build
+bun run build
+
+# preview the build
+bun run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Content
+- Posts: add `.md` or `.mdx` under `src/content/blog`. Schema validates `title`, `description`, `pubDate`, `updatedDate?`, `heroImage?`, `tags[]`.
+- Authors: `src/content/authors.yml`.
+- Socials: `src/content/socials.yml`.
 
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+Frontmatter example:
+```md
+---
+title: "How we launch in 6 weeks"
+description: "End-to-end process for small teams."
+pubDate: 2024-12-12
+updatedDate: 2025-01-03
+tags: [delivery, process]
+heroImage: ../../assets/blog/ship.jpg
+---
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Quick customization
+- Site name and description in [src/consts.ts](src/consts.ts).
+- Navigation and hero actions in [src/pages/index.astro](src/pages/index.astro).
+- Colors, type, and utilities in `src/styles/global.css`.
+- Key components: header with search and toggles ([src/components/Header.astro](src/components/Header.astro)), base layout ([src/layouts/BaseLayout.astro](src/layouts/BaseLayout.astro)).
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Available scripts
+- `npm run dev`: server on `localhost:4321` (Astro default).
+- `npm run build`: outputs `dist/` ready to deploy.
+- `npm run preview`: serves the built site locally.
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+## Deploy
+Output is static HTML. Upload `dist/` to your platform of choice (Netlify, Vercel, Cloudflare Pages, S3+CDN). Set `BASE_URL` if you publish under a subpath.

@@ -17,6 +17,7 @@
     "astro": "^5.16.8",
     "astro-icon": "^1.1.5",
     "astro-pagefind": "^1.8.5",
+    "astro-seo": "^1.1.0",
     "pagefind": "^1.4.0",
     "sharp": "^0.34.3",
     "tailwindcss": "^4.1.18"

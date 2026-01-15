@@ -11,10 +11,12 @@ interface Props {
 	actions?: Action[];
 }
 
+import { withBase } from '../utils/slugify';
+
 const { eyebrow, title, description, actions = [] } = Astro.props;
 ---
 
-<section class="min-h-screen flex items-center md:px-8">
+<section class="min-h-screen flex items-center">
 	<div class="grid gap-3 md:gap-4 max-w-3xl pb-6 md:pb-10">
 		{eyebrow && <p class="eyebrow">{eyebrow}</p>}
 		<h1 class="text-4xl md:text-5xl lg:text-6xl leading-tight m-0">{title}</h1>
@@ -22,7 +24,7 @@ const { eyebrow, title, description, actions = [] } = Astro.props;
 		{actions.length > 0 && (
 			<div class="flex flex-wrap gap-3 mt-3">
 				{actions.map((action) => (
-					<a class="button primary" href={action.href}>
+					<a class="button primary" href={withBase(action.href)}>
 						{action.label}
 					</a>
 				))}

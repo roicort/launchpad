@@ -3,7 +3,7 @@
 @theme {
 	--font-sans: "Space Grotesk", "Inter", system-ui, sans-serif;
 	--color-ink: #050505;
-	--color-muted: color-mix(in oklab, var(--color-ink) 62%, transparent);
+	--color-muted: color-mix(in oklab, var(--color-ink) 72%, transparent);
 	--color-paper: #f9f9f9;
 	--color-surface: #ffffff;
 	--color-border: color-mix(in oklab, var(--color-ink) 14%, transparent);
@@ -19,6 +19,8 @@
 		--grid-cell: calc(100vw / var(--grid-divisions));
 		--grid-cell-x: var(--grid-cell);
 		--grid-cell-y: var(--grid-cell);
+		--content-columns: 15;
+		--content-width: calc(var(--grid-cell) * var(--content-columns));
 	}
 
 	:root[data-theme="dark"] {
@@ -31,6 +33,16 @@
 		--grid-line: color-mix(in oklab, var(--color-ink) 10%, transparent);
 	}
 
+	:root[data-theme="blue"] {
+		color-scheme: light;
+		--color-ink: #84cdfa;
+		--color-muted: color-mix(in oklab, var(--color-ink) 62%, transparent);
+		--color-paper: #0f1b3f;
+		--color-surface: #0f1b3f;
+		--color-border: color-mix(in oklab, var(--color-ink) 18%, transparent);
+		--grid-line: color-mix(in oklab, var(--color-ink) 12%, transparent);
+	}
+
 	*,
 	*::before,
 	*::after {
@@ -40,6 +52,8 @@
 	body {
 		margin: 0;
 		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
 		font-family: var(--font-sans);
 		line-height: 1.6;
 		color: var(--color-ink);
@@ -66,11 +80,15 @@
 		white-space: nowrap;
 		border: 0;
 	}
+
+	:root[data-debug='on'] * {
+		outline: 1px dashed color-mix(in oklab, var(--color-ink) 45%, transparent);
+		outline-offset: -1px;
+	}
 }
 
 @layer components {
-	.site-header {
-	.text-muted {
+ 	.text-muted {
 		color: var(--color-muted);
 	}
 
@@ -216,7 +234,7 @@
 	.section-heading {
 		display: grid;
 		gap: 0.4rem;
-		margin-bottom: 1rem;
+		margin: 2rem 0 1rem;
 	}
 
 	.section-heading h1 {
@@ -228,6 +246,19 @@
 	.post-page {
 		display: grid;
 		gap: 2rem;
+	}
+
+	.content-shell {
+		width: 100%;
+		max-width: var(--content-width);
+		margin: 0 auto;
+		padding-left: var(--grid-cell);
+		padding-right: var(--grid-cell);
+	}
+
+	.content-shell.content-shell--flush {
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	.post-hero-image img {
@@ -251,5 +282,125 @@
 		margin: 0.25rem 0;
 		line-height: 1.2;
 	}
-}
+
+	/* Markdown prose styles */
+	.prose {
+		margin: 0 auto;
+		color: var(--color-ink);
+		font-size: 1rem;
+		line-height: 1.75;
+	}
+
+	.prose p {
+		margin: 1rem 0;
+		color: inherit;
+		line-height: 1.8;
+	}
+
+	.prose h1,
+	.prose h2,
+	.prose h3,
+	.prose h4,
+	.prose h5,
+	.prose h6 {
+		margin: 1.25rem 0 0.5rem;
+		font-weight: 700;
+		color: inherit;
+	}
+
+	.prose h1 {
+		font-size: 1.75rem;
+	}
+
+	.prose h2 {
+		font-size: 1.5rem;
+	}
+
+	.prose h3 {
+		font-size: 1.25rem;
+	}
+
+	.prose a {
+		color: color-mix(in oklab, var(--color-ink) 90%, transparent);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.prose a:hover {
+		color: var(--color-ink);
+	}
+
+	.prose img {
+		max-width: 100%;
+		height: auto;
+		display: block;
+		margin: 1rem 0;
+		border-radius: 8px;
+		border: 1px solid var(--color-border);
+	}
+
+	.prose blockquote {
+		margin: 1rem 0;
+		padding: 0.75rem 1rem;
+		border-left: 4px solid color-mix(in oklab, var(--color-ink) 28%, transparent);
+		background: color-mix(in oklab, var(--color-ink) 6%, var(--color-surface));
+		color: var(--color-muted);
+		border-radius: 6px;
+	}
+
+	.prose hr {
+		height: 1px;
+		border: none;
+		background: color-mix(in oklab, var(--color-ink) 18%, transparent);
+		margin: 2rem 0;
+	}
+
+	.prose ul,
+	.prose ol {
+		margin: 1rem 0;
+		padding-left: 1.25rem;
+	}
+
+	.prose li {
+		margin: 0.35rem 0;
+	}
+
+	.prose code {
+		background: color-mix(in oklab, var(--color-ink) 6%, transparent);
+		padding: 0.12rem 0.28rem;
+		border-radius: 6px;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+		font-size: 0.95em;
+	}
+
+	.prose pre {
+		margin: 1rem 0;
+		overflow: auto;
+		padding: 1rem;
+		border-radius: 8px;
+		background: color-mix(in oklab, var(--color-surface) 90%, var(--color-ink) 10%);
+		border: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
+	}
+
+	.prose pre code {
+		background: transparent;
+		padding: 0;
+		color: inherit;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+	}
+
+	.prose table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1rem 0;
+		overflow: auto;
+		display: block;
+	}
+
+	.prose th,
+	.prose td {
+		padding: 0.5rem 0.75rem;
+		border: 1px solid color-mix(in oklab, var(--color-ink) 14%, transparent);
+		text-align: left;
+	}
 }

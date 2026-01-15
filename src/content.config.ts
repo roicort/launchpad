@@ -13,11 +13,12 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: image().optional(),
+			tags: z.array(z.string()).default([]),
 		}),
 });
 
 const authors = defineCollection({
-	loader: file('src/content/authors.yml'),
+	loader: glob({ base: './src/content/authors', pattern: '**/*.yml' }),
 	schema: ({ image }) =>
 		z.object({
 			id: z.string(),

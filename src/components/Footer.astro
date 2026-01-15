@@ -16,8 +16,8 @@ const iconMap: Record<string, string> = {
 };
 ---
 
-<footer class="mt-12 border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-5 md:px-7 py-8">
-  <div class="mx-auto w-full max-w-6xl px-0 md:px-2">
+<footer class="border-t border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-8">
+  <div class="content-shell content-shell--flush">
     <div class="grid gap-10 border-b border-[color:var(--color-border)] pb-10 md:grid-cols-2">
       <div class="space-y-6">
         <p class="text-3xl sm:text-4xl font-semibold tracking-tight text-ink">Resources</p>
@@ -71,10 +71,10 @@ const iconMap: Record<string, string> = {
       </div>
     </div>
     <div class="grid gap-6 pt-8 pb-4 md:flex md:items-center md:justify-between">
-      <p class="text-sm text-muted m-0">&copy; {today.getFullYear()} {SITE_TITLE}. All rights reserved.</p>
+      <p class="text-sm text-muted m-0">{SITE_TITLE} &copy; NonZeroSum {today.getFullYear()}. All rights reserved.</p>
       <div class="md:text-right space-y-2 md:space-y-1">
         <div class="flex flex-wrap items-center gap-3 md:justify-end">
-          <p class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink m-0">CDMX, México</p>
+          <p class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink m-0">México City</p>
           <Clock
             label=""
             timeZone="America/Mexico_City"
@@ -82,7 +82,7 @@ const iconMap: Record<string, string> = {
             class="text-sm font-semibold text-ink"
           />
         </div>
-        <p class="text-sm text-subtle m-0">Designed for a content + agency scaffold.</p>
+        <p class="text-sm text-subtle m-0">Designed by Rodrigo Cortez @ Morelia.</p>
       </div>
     </div>
   </div>
