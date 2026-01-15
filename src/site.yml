@@ -1,0 +1,3 @@
+global-config:
+  title: "Launchpad"
+  description: "A modern Astro scaffolding for agencies and studios."

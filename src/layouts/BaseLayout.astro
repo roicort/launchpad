@@ -3,7 +3,7 @@ import type { ImageMetadata } from 'astro';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_TITLE } from '../consts';
+import { getSite } from '../consts';
 
 interface Props {
 	title?: string;
@@ -11,7 +11,8 @@ interface Props {
 	image?: ImageMetadata;
 }
 
-const { title = SITE_TITLE, description = SITE_TITLE, image } = Astro.props;
+const site = await getSite();
+const { title = site.title, description = site.description, image } = Astro.props;
 ---
 
 <!doctype html>

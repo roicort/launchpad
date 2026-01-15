@@ -1,9 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
-import { SITE_TITLE } from '../../consts';
+import { getSite } from '../../consts';
 
 const posts = await getCollection('blog');
+const site = await getSite();
 const slugify = (value: string) => value.toLowerCase().replace(/\s+/g, '-');
 
 const tagCounts = new Map<string, number>();
@@ -19,7 +20,7 @@ const tags = Array.from(tagCounts.entries()).sort((a, b) => {
 });
 ---
 
-<PageLayout title={`Tags · ${SITE_TITLE}`} description="Explora las entradas por etiqueta">
+<PageLayout title={`Tags · ${site.title}`} description="Explora las entradas por etiqueta">
 	<section class="content-shell py-12 space-y-6">
 		<header class="space-y-2">
 			<p class="text-sm uppercase tracking-[0.3em] text-muted">Etiquetas</p>

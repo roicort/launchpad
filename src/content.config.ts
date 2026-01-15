@@ -40,4 +40,12 @@ const socials = defineCollection({
 	}),
 });
 
-export const collections = { blog, socials, authors };
+const site = defineCollection({
+	loader: file('src/site.yml'),
+	schema: z.object({
+		title: z.string(),
+		description: z.string().optional(),
+	}),
+});
+
+export const collections = { blog, socials, authors, site };

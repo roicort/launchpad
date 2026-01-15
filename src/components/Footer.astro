@@ -1,6 +1,8 @@
 ---
-import { SITE_TITLE } from '../consts';
+import { getSite } from '../consts';
 import { getCollection } from 'astro:content';
+
+const site = await getSite();
 import { Icon } from 'astro-icon/components'
 import Clock from './Clock.astro';
 
@@ -71,7 +73,7 @@ const iconMap: Record<string, string> = {
       </div>
     </div>
     <div class="grid gap-6 pt-8 pb-4 md:flex md:items-center md:justify-between">
-      <p class="text-sm text-muted m-0">{SITE_TITLE} &copy; NonZeroSum {today.getFullYear()}. All rights reserved.</p>
+      <p class="text-sm text-muted m-0">{site.title} &copy; NonZeroSum {today.getFullYear()}. All rights reserved.</p>
       <div class="md:text-right space-y-2 md:space-y-1">
         <div class="flex flex-wrap items-center gap-3 md:justify-end">
           <p class="text-2xl sm:text-3xl font-semibold tracking-tight text-ink m-0">México City</p>
