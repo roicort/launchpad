@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import Prose from '../components/Prose.astro';
 import { slugify, withBase } from '../utils/slugify';
 
 interface Props {
@@ -49,8 +50,10 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [], Content 
             </figure>
         )}
 
-        <section class="post-article prose">
-            {Content ? <Content /> : <slot />}
+        <section class="post-article">
+            <Prose>
+                {Content ? <Content /> : <slot />}
+            </Prose>
         </section>
     </article>
     </div>

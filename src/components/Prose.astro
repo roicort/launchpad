@@ -1,0 +1,11 @@
+---
+const { class: className = '' } = Astro.props;
+---
+
+<div
+	class={
+		`prose prose-neutral dark:prose-invert max-w-none ${className}`.trim()
+	}
+>
+	<slot />
+</div>
