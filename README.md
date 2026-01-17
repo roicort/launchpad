@@ -4,6 +4,10 @@ An Astro starter tailored for agencies and studios: MDX blog, global search, RSS
 
 ![](./public/SS-1.png)
 
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/static-site?referralCode=welcome)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/roicort/launchpad)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Froicort%2Flaunchpad)
+
 ## Features
 - Blog with Markdown/MDX, featured post, and tag listings
 - Typed collections for posts, authors, and socials in [src/content.config.ts](src/content.config.ts)
