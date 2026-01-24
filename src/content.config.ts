@@ -59,6 +59,9 @@ const site = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
+		based: z.string().optional(),
+		timezone: z.string().optional(),
+		locale: z.string().optional(),
 	}),
 });
 

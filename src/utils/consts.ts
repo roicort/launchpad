@@ -9,5 +9,8 @@ export async function getSite() {
 	return {
 		title: entry?.data.title,
 		description: entry?.data.description,
+		based: entry?.data.based,
+		timezone: entry?.data.timezone,
+		locale: entry?.data.locale,
 	};
 }

@@ -4,13 +4,15 @@ import Hero from '../components/Hero.astro';
 import PostList from '../components/PostList.astro';
 import Numbers from '../components/Numbers.astro';
 import Values from '../components/Values.astro';
+import { getSite } from '../utils/consts';
+const site = await getSite();
 ---
 
 <PageLayout
-	title="Blueprint"
+	title={site.title}
 >
 	<Hero
-		eyebrow="Astro Blueprint"
+		eyebrow="An Astro Blueprint"
 		title="A modern Astro scaffolding for agencies and studios."
 		description="Kickstart your next project with a solid foundation, featuring a blog, project showcases, and dark mode support."
 		actions={[
