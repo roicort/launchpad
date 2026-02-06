@@ -1,0 +1,29 @@
+- id: sofia
+  quote: Excellent experience with the team. The product met our needs and the support was outstanding.
+  author: Sofía
+  role: CEO, Acme Co
+
+- id: rodrigo
+  quote: A very useful and well-thought-out tool. It helped me optimize processes quickly.
+  author: Rodrigo
+  role: Product Manager
+
+- id: diego
+  quote: The team exceeded our expectations and delivered on time. Highly recommend.
+  author: Diego
+  role: Head of Engineering
+
+- id: maria
+  quote: Clear communication and fast delivery. The final product is solid and reliable.
+  author: Maria
+  role: CTO
+
+- id: alex
+  quote: The product is easy to use and saved us hours every week.
+  author: Alex
+  role: Operations Manager
+
+- id: lina
+  quote: Support was responsive and helped us get set up quickly.
+  author: Lina
+  role: Customer Success

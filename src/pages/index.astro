@@ -4,6 +4,8 @@ import Hero from '../components/Hero.astro';
 import PostList from '../components/PostList.astro';
 import Numbers from '../components/Numbers.astro';
 import Values from '../components/Values.astro';
+import Sponsors from '../components/Sponsors.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { getSite } from '../utils/consts';
 const site = await getSite();
 ---
@@ -19,6 +21,9 @@ const site = await getSite();
 			{ label: 'View Blog', href: '/blog' },
 			{ label: 'Get Quote', href: '/contact' },
 		]}
+	/>
+
+	<Sponsors
 	/>
 
 	<Numbers
@@ -51,4 +56,9 @@ const site = await getSite();
 		viewAllHref="/blog"
 	/>
 		
+	<Testimonials
+		eyebrow="Testimonials"
+		title="What our clients say"
+	/>
+
 </PageLayout>
