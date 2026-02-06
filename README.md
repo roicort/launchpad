@@ -9,6 +9,7 @@ An Astro starter tailored for agencies and studios: MDX blog, global search, RSS
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Froicort%2Flaunchpad)
 
 ## Features
+- [Lighthouse Score: 100](https://pagespeed.web.dev/analysis/https-roicort-github-io-launchpad/xthz1r5i4v?form_factor=mobile)
 - Blog with Markdown/MDX, featured post, and tag listings
 - Typed collections for posts, authors, and socials in [src/content.config.ts](src/content.config.ts)
 - Site-wide search via Pagefind with an accessible modal
