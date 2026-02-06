@@ -57,7 +57,9 @@ if (!testimonials) {
     </button>
     <div class="flex items-center gap-1.5">
       {items.map((_, i) => (
-        <button class={`slider-dot h-1.5 rounded-full transition-all duration-300 cursor-pointer ${i === 0 ? 'w-5 bg-ink' : 'w-1.5 bg-ink/20'}`} data-dot={i} aria-label={`Ir a testimonio ${i + 1}`} />
+        <button class="relative p-3 cursor-pointer group" data-dot={i} aria-label={`Ir a testimonio ${i + 1}`}>
+          <span class={`slider-dot block h-1.5 rounded-full transition-all duration-300 ${i === 0 ? 'w-5 bg-ink' : 'w-1.5 bg-ink/20'}`} />
+        </button>
       ))}
     </div>
     <button data-dir="1" aria-label="Siguiente" class="slider-nav group rounded-full border border-border bg-surface p-2.5 shadow-sm transition-all duration-200 hover:border-ink/25 hover:shadow-md active:scale-95 cursor-pointer">
@@ -72,7 +74,7 @@ import { gsap } from 'gsap';
 const section = document.querySelector('.testimonial-section');
 if (section) {
   const slides = gsap.utils.toArray<HTMLElement>('.slide', section);
-  const dots = section.querySelectorAll<HTMLElement>('.slider-dot');
+  const dots = section.querySelectorAll<HTMLElement>('.slider-dot') as NodeListOf<HTMLElement>;
   const total = slides.length;
   let current = 0;
   let tweening = false;
@@ -89,8 +91,8 @@ if (section) {
     gsap.to(slides[current], { xPercent: dir * -100, onComplete: () => (tweening = false) });
     gsap.to(slides[next], { xPercent: 0 });
 
-    dots[current].className = 'slider-dot h-1.5 rounded-full transition-all duration-300 cursor-pointer w-1.5 bg-ink/20';
-    dots[next].className = 'slider-dot h-1.5 rounded-full transition-all duration-300 cursor-pointer w-5 bg-ink';
+    dots[current].className = 'slider-dot block h-1.5 rounded-full transition-all duration-300 w-1.5 bg-ink/20';
+    dots[next].className = 'slider-dot block h-1.5 rounded-full transition-all duration-300 w-5 bg-ink';
 
     current = next;
   };
@@ -102,8 +104,8 @@ if (section) {
     btn.addEventListener('click', () => advance(Number(btn.dataset.dir)))
   );
 
-  dots.forEach((dot) =>
-    dot.addEventListener('click', () => goTo(Number(dot.dataset.dot)))
+  section.querySelectorAll<HTMLElement>('[data-dot]').forEach((btn) =>
+    btn.addEventListener('click', () => goTo(Number(btn.dataset.dot)))
   );
 
   // Auto-play con pausa en hover
