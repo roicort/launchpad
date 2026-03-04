@@ -2,6 +2,7 @@
 import Card from "./Card.astro";
 import { getCollection } from "astro:content";
 import { withBase } from "../utils/slugify";
+import { getLangFromUrl, useTranslatedPath } from "../i18n/utils";
 
 interface RawPost {
   // collection item shape:
@@ -48,13 +49,23 @@ if (posts.length === 0) {
     '[PostList] No posts provided; fetching from "blog" collection.',
   );
   posts = posts
-    .concat(await getCollection("blog"))
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    .concat((await getCollection("blog")) as unknown as RawPost[])
+    .sort((a, b) => {
+      const aDate = new Date((a as any)?.data?.pubDate ?? 0).valueOf();
+      const bDate = new Date((b as any)?.data?.pubDate ?? 0).valueOf();
+      return bDate - aDate;
+    });
 }
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 
-const subpath = import.meta.env.BASE_URL;
+const localizedPosts = posts.filter((post) => {
+  const id = (post as any).id;
+  return typeof id === "string" ? id.startsWith(`${lang}/`) : true;
+});
 
-const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
+const visiblePosts =
+  typeof limit === "number" ? localizedPosts.slice(0, limit) : localizedPosts;
 ---
 
 <section>
@@ -76,8 +87,10 @@ const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
           visiblePosts.map((post) => {
             const p = getPostData(post) || {};
             const id = (post as any).id;
+            const normalizedId =
+              typeof id === "string" ? id.replace(/^[^/]+\//, "") : undefined;
             const href = id
-              ? withBase(`/blog/${id}/`)
+              ? withBase(translatePath(`/blog/${normalizedId}/`))
               : p.href
                 ? withBase(p.href)
                 : undefined;
@@ -86,7 +99,7 @@ const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
               ? rawDate instanceof Date
                 ? rawDate
                 : new Date(rawDate)
-              : null;
+              : undefined;
 
             return (
               <Card
@@ -96,15 +109,13 @@ const visiblePosts = typeof limit === "number" ? posts.slice(0, limit) : posts;
                 imageAlt={p.title}
                 description={p.description}
                 date={pubDate}
-                variant="post"
               />
             );
           })
         }
         <Card
           title={viewAllLabel}
-          href={withBase(viewAllHref ?? "/blog/")}
-          variant="post"
+          href={withBase(viewAllHref ?? translatePath("/blog/"))}
         />
       </div>
     </div>

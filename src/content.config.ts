@@ -66,7 +66,7 @@ const site = defineCollection({
 });
 
 const testimonials = defineCollection({
-	loader: file('src/content/testimonials.yml'),
+	loader: glob({ base: './src/content/testimonials', pattern: '**/*.yml' }),
 	schema: ({ image }) =>
 		z.object({
 			quote: z.string(),

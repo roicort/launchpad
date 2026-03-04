@@ -8,6 +8,7 @@ interface Testimonial {
 
 import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
+import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
 	eyebrow?: string;
@@ -16,14 +17,15 @@ interface Props {
 }
 
 const { eyebrow, title, testimonials } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
 
 let items: Testimonial[] = testimonials ?? [];
 
 if (!testimonials) {
 	const entries = await getCollection('testimonials');
-	items = entries.length === 1 && Array.isArray(entries[0].data)
-		? entries[0].data as Testimonial[]
-		: entries.map((e) => e.data as Testimonial);
+  items = entries
+    .filter((entry) => entry.id.startsWith(`${lang}/`))
+    .map((entry) => entry.data as Testimonial);
 }
 ---
 
@@ -33,10 +35,10 @@ if (!testimonials) {
     {title && <h2 class="text-3xl sm:text-4xl font-semibold leading-tight text-ink m-0">{title}</h2>}
   </header>
 
-  <div class="slider w-full flex flex-col justify-center items-center relative overflow-hidden min-h-[220px] md:min-h-[260px]">
+  <div class="slider w-full flex flex-col justify-center items-center relative overflow-hidden min-h-55 md:min-h-65">
     {items.map((t, i) => (
       <article class="slide absolute inset-0 flex items-center justify-center px-2" data-index={i}>
-        <div class="w-full max-w-[720px] rounded-2xl border border-border bg-surface px-6 py-5 shadow-sm relative">
+        <div class="w-full max-w-180 rounded-2xl border border-border bg-surface px-6 py-5 shadow-sm relative">
           <Icon name="tabler:quote" size={28} class="text-border absolute top-4 right-5 opacity-60" />
           <blockquote class="not-italic text-base md:text-lg leading-relaxed mb-4 text-ink m-0">{t.quote}</blockquote>
           <div class="flex items-center gap-3">
@@ -88,7 +90,7 @@ if (section) {
     const dir = next > current ? 1 : -1;
 
     gsap.set(slides[next], { xPercent: dir * 100 });
-    gsap.to(slides[current], { xPercent: dir * -100, onComplete: () => (tweening = false) });
+    gsap.to(slides[current], { xPercent: dir * -100, onComplete: () => { tweening = false; } });
     gsap.to(slides[next], { xPercent: 0 });
 
     dots[current].className = 'slider-dot block h-1.5 rounded-full transition-all duration-300 w-1.5 bg-ink/20';

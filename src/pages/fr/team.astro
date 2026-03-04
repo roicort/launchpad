@@ -1,24 +1,23 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
-import Card from '../components/Card.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import Card from '../../components/Card.astro';
 import { getCollection } from 'astro:content';
-import { defaultLang } from '../i18n/ui';
 
-const authorsEntries = (await getCollection('authors')).filter((entry) => entry.id.startsWith(`${defaultLang}/`));
+const authorsEntries = (await getCollection('authors')).filter((entry) => entry.id.startsWith('fr/'));
 const team = authorsEntries.map((entry) => entry.data);
 ---
 
 <PageLayout
-	title="About the studio"
-	description="We shape product, brand, and code for mission-driven teams."
+	title="Équipe"
+	description="Les personnes derrière le travail."
 	eyebrow="Studio"
 >
 	<section class="content-shell py-12 space-y-8">
 		<header class="space-y-3 max-w-3xl">
-			<p class="text-xs uppercase tracking-[0.3em] text-subtle">Team</p>
-			<h1 class="text-3xl sm:text-4xl font-semibold leading-tight text-ink">Meet the people behind the work</h1>
+			<p class="text-xs uppercase tracking-[0.3em] text-subtle">Équipe</p>
+			<h1 class="text-3xl sm:text-4xl font-semibold leading-tight text-ink">Rencontrez les personnes derrière les projets</h1>
 			<p class="text-base text-muted">
-				A compact, senior team that blends research, design, and engineering to ship resilient products.
+				Une équipe senior compacte qui réunit recherche, design et ingénierie.
 			</p>
 		</header>
 

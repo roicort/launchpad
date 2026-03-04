@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { getSite } from '../utils/consts';
+import { getLangFromUrl } from '../i18n/utils';
 
 interface Props {
 	title?: string;
@@ -13,13 +14,16 @@ interface Props {
 
 const site = await getSite();
 const { title = site.title, description = site.description, image } = Astro.props;
+
+// determine current language from the URL
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
     <head>
         <BaseHead title={title} description={description} image={image} />
-    </head>
+
     <body>
         <Header />
         <main class="content-shell">
