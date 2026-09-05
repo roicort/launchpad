@@ -13,7 +13,11 @@ interface Props {
 }
 
 const site = await getSite();
-const { title = site.title, description = site.description, image } = Astro.props;
+const {
+    title = site.title ?? 'Launchpad',
+    description = site.description ?? '',
+    image,
+} = Astro.props;
 
 // determine current language from the URL
 const lang = getLangFromUrl(Astro.url);
@@ -23,6 +27,7 @@ const lang = getLangFromUrl(Astro.url);
 <html lang={lang}>
     <head>
         <BaseHead title={title} description={description} image={image} />
+    </head>
 
     <body>
         <Header />
