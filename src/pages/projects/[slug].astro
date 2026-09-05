@@ -3,9 +3,9 @@ import { type CollectionEntry, getCollection, render } from 'astro:content';
 import ProjectPost from '../../layouts/ProjectPost.astro';
 
 export async function getStaticPaths() {
-	const projects = await getCollection('projects');
+	const projects = (await getCollection('projects')).filter((project) => project.id.startsWith('en/'));
 	return projects.map((project) => ({
-		params: { slug: project.id },
+		params: { slug: project.id.replace(/^en\//, '') },
 		props: project,
 	}));
 }

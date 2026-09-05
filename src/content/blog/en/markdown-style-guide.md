@@ -4,7 +4,7 @@ description: Here is a sample of some basic Markdown syntax that can be used
   when writing Markdown content in Astro.
 pubDate: 2026-01-15
 updatedDate: 2026-01-15
-heroImage: ../../assets/blog-placeholder-about.png
+heroImage: ../../../assets/blog-placeholder-about.png
 author: rodrigo
 tags:
   - markdown
@@ -45,7 +45,7 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 ### Output
 
-![blog placeholder](../../assets/blog-placeholder-about.png)
+![blog placeholder](../../../assets/blog-placeholder-about.png)
 
 ## Blockquotes
 

@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob, file } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
@@ -66,7 +67,7 @@ const site = defineCollection({
 });
 
 const testimonials = defineCollection({
-	loader: file('src/content/testimonials.yml'),
+	loader: glob({ base: './src/content/testimonials', pattern: '**/*.yml' }),
 	schema: ({ image }) =>
 		z.object({
 			quote: z.string(),

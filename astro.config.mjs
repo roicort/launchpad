@@ -18,11 +18,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  experimental: {
-    fonts: [{
-        provider: fontProviders.fontsource(),
-        name: "Space Grotesk",
-        cssVariable: "--font-main",
-    }]
-    }
+  fonts: [{
+      provider: fontProviders.fontsource(),
+      name: "Space Grotesk",
+      cssVariable: "--font-main",
+  }]
 });
