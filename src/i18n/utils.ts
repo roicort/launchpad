@@ -1,7 +1,11 @@
 import { ui, defaultLang, showDefaultLang } from './ui';
 
 export function getLangFromUrl(url: URL) {
-  const [, lang] = url.pathname.split('/');
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const pathname = base && url.pathname.startsWith(base)
+    ? url.pathname.slice(base.length)
+    : url.pathname;
+  const [, lang] = pathname.split('/');
   if (lang in ui) return lang as keyof typeof ui;
   return defaultLang;
 }

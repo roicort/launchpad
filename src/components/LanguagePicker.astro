@@ -1,6 +1,7 @@
 ---
 import { languages } from '../i18n/ui';
 import { getLangFromUrl, useTranslatedPath } from '../i18n/utils';
+import { withBase } from '../utils/slugify';
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
@@ -24,7 +25,7 @@ const currentLabel = languages[lang];
               'language-picker__option',
               isCurrent && 'language-picker__option--active',
             ]}
-            href={translatePath('/', l)}
+            href={withBase(translatePath('/', l))}
             aria-current={isCurrent ? 'page' : undefined}
           >
             <span class="language-picker__option-code" aria-hidden="true">{l.toUpperCase()}</span>
