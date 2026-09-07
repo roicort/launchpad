@@ -6,7 +6,7 @@ const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 const currentLabel = languages[lang];
 ---
-<details class="language-picker" role="listbox" aria-label="Language selector">
+<details class="language-picker" aria-label="Language selector">
   <summary class="header-button language-picker__trigger w-auto! min-w-9 px-2 gap-1" aria-label={`Current language: ${currentLabel}`}>
     <span class="language-picker__code">{lang.toUpperCase()}</span>
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
