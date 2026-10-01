@@ -178,20 +178,21 @@ window.addEventListener('keydown', (event) => {
 	z-index: 0;
 }
 
-:global(html[data-theme='dark'] .search-modal__backdrop) {
-	background: color-mix(in oklab, var(--color-paper, #101012) 35%, #06060a 65%);
-}
-
 .search-modal__panel {
 	position: relative;
 	width: min(960px, 100%);
-	margin-top: clamp(32px, 6vh, 96px);
+	margin-block: clamp(32px, 6vh, 96px);
+	max-height: calc(100dvh - clamp(88px, 20vw, 256px));
 	border: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
 	background: color-mix(in oklab, var(--color-surface, #fff) 94%, transparent);
 	border-radius: 24px;
 	box-shadow: 0 24px 80px color-mix(in oklab, var(--color-ink, #111) 12%, transparent);
 	padding: clamp(1rem, 2vw, 1.5rem);
 	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	overflow: hidden;
 }
 
 .search-modal__header {
@@ -260,6 +261,14 @@ window.addEventListener('keydown', (event) => {
 	margin: 0.75rem 0 0;
 	font-size: 0.82rem;
 	color: var(--color-muted, #6b6b6b);
+	flex: none;
+}
+
+#search-root {
+	min-height: 0;
+	flex: 1 1 auto;
+	overflow-y: auto;
+	overscroll-behavior: contain;
 }
 
 :global(body.search-open) {
@@ -308,8 +317,6 @@ window.addEventListener('keydown', (event) => {
 
 :global(#search-modal .pagefind-ui__results) {
 	margin-top: 1rem;
-	max-height: 60vh;
-	overflow-y: auto;
 	display: grid;
 	gap: 0.6rem;
 }
@@ -346,7 +353,8 @@ window.addEventListener('keydown', (event) => {
 
 @media (max-width: 720px) {
 	.search-modal__panel {
-		margin-top: clamp(16px, 5vh, 42px);
+		margin-block: clamp(16px, 5vh, 42px);
+		max-height: calc(100dvh - clamp(56px, 18vw, 108px));
 		padding: 1rem;
 	}
 
